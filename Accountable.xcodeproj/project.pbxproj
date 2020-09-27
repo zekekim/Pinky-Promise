@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4289184F7DFD1C77D4ED001C /* Pods_Accountable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 026B594B100F008A1629340F /* Pods_Accountable.framework */; };
-		466B2AECB88F1B8A11EA942C /* Pods_AccountableTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847DAC7112C1D29671AABF1D /* Pods_AccountableTests.framework */; };
-		7C837185BA6C0409A896F9D9 /* Pods_Accountable_AccountableUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56466BE7B1639AC8E57AA9F4 /* Pods_Accountable_AccountableUITests.framework */; };
 		A10E88D624DE002400288473 /* NewGroupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10E88D524DE002400288473 /* NewGroupPage.swift */; };
 		A147560F251C29C5007C6480 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A147560E251C29C5007C6480 /* GoogleService-Info.plist */; };
 		A155191024E87EBB00232D76 /* SettingsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A155190F24E87EBB00232D76 /* SettingsPage.swift */; };
@@ -46,14 +43,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		026B594B100F008A1629340F /* Pods_Accountable.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Accountable.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3204F3BF3BB1182F1F245ECC /* Pods-AccountableTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AccountableTests.debug.xcconfig"; path = "Target Support Files/Pods-AccountableTests/Pods-AccountableTests.debug.xcconfig"; sourceTree = "<group>"; };
 		45A1EE97144B7BC9CB087C22 /* Pods-AccountableTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AccountableTests.release.xcconfig"; path = "Target Support Files/Pods-AccountableTests/Pods-AccountableTests.release.xcconfig"; sourceTree = "<group>"; };
-		56466BE7B1639AC8E57AA9F4 /* Pods_Accountable_AccountableUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Accountable_AccountableUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7519589ADBB67E3A229359EC /* Pods-Accountable.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accountable.debug.xcconfig"; path = "Target Support Files/Pods-Accountable/Pods-Accountable.debug.xcconfig"; sourceTree = "<group>"; };
 		796CC1FDDB04D2D192D2955E /* Pods-Accountable.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accountable.release.xcconfig"; path = "Target Support Files/Pods-Accountable/Pods-Accountable.release.xcconfig"; sourceTree = "<group>"; };
 		840A8561F9209AECD4F312B5 /* Pods-Accountable-AccountableUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accountable-AccountableUITests.debug.xcconfig"; path = "Target Support Files/Pods-Accountable-AccountableUITests/Pods-Accountable-AccountableUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		847DAC7112C1D29671AABF1D /* Pods_AccountableTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AccountableTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A10E88D524DE002400288473 /* NewGroupPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGroupPage.swift; sourceTree = "<group>"; };
 		A1475604251C2319007C6480 /* Accountable.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Accountable.entitlements; sourceTree = "<group>"; };
 		A147560E251C29C5007C6480 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -85,7 +79,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4289184F7DFD1C77D4ED001C /* Pods_Accountable.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,7 +86,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				466B2AECB88F1B8A11EA942C /* Pods_AccountableTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,7 +93,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C837185BA6C0409A896F9D9 /* Pods_Accountable_AccountableUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,7 +120,6 @@
 				A182F8F024B3BF4C0050D8DB /* AccountableUITests */,
 				A182F8D224B3BF4A0050D8DB /* Products */,
 				1BDBD610021E8A41EA7EFBC6 /* Pods */,
-				F8CF0C03DF30B80ED481C58A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -190,16 +180,6 @@
 				A182F8F324B3BF4C0050D8DB /* Info.plist */,
 			);
 			path = AccountableUITests;
-			sourceTree = "<group>";
-		};
-		F8CF0C03DF30B80ED481C58A /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				026B594B100F008A1629340F /* Pods_Accountable.framework */,
-				56466BE7B1639AC8E57AA9F4 /* Pods_Accountable_AccountableUITests.framework */,
-				847DAC7112C1D29671AABF1D /* Pods_AccountableTests.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
