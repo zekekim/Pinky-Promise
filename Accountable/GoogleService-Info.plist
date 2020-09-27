@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>890591116285-6r0mddq1cq15megv6slpoi8b5mpof7fc.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.890591116285-6r0mddq1cq15megv6slpoi8b5mpof7fc</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCWP0v0AeHvFLohYfguxPl1i9npqoqEK7s</string>
+	<key>GCM_SENDER_ID</key>
+	<string>890591116285</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.ezekielkim.Accountable</string>
+	<key>PROJECT_ID</key>
+	<string>accountable-379da</string>
+	<key>STORAGE_BUCKET</key>
+	<string>accountable-379da.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:890591116285:ios:ac95477d38ac3aaedaf794</string>
+	<key>DATABASE_URL</key>
+	<string>https://accountable-379da.firebaseio.com</string>
+</dict>
+</plist>
