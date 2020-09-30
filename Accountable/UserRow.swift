@@ -6,15 +6,74 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseFirestoreSwift
 
 struct UserRow: View {
+    var groupName: String
+    var groupID: String
+    var user = Auth.auth().currentUser
+    var email = ""
+    @State var name: String = ""
+    @State var goal: String
+    @State var completed: Bool = false
+    @State var daysForgotten: Int = 0
+    @EnvironmentObject var model:GroupListModel
+    let db = Firestore.firestore()
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var body: some View {
-        Text("Hello, World!")
+        HStack {
+            VStack(alignment: .leading) {
+                Text(goal)
+                    .foregroundColor(daysForgotten >= 3 ? .red : .black)
+                    .font(.subheadline)
+                HStack {
+                    Text(name)
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                }
+            }
+            Spacer()
+            Image(systemName: completed ? "checkmark.circle.fill" : "hand.point.left")
+                .foregroundColor(completed ? .green : .blue)
+                .onTapGesture(count: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/, perform: {
+                    if(!completed) {
+                        sendTap()
+                    }
+                })
+        }
+        .onAppear(perform: {
+            model.email = email
+            model.fetchUser()
+            if(model.currentCompleted.contains(email)) {
+                completed = true
+            }
+        })
+        .padding()
     }
+    func sendTap() {
+        db.collection("notifications").document("taps").setData([
+            "\(groupName)": model.fcmToken
+        ], merge: true) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Group Document successfully written!")
+                
+            }
+        }
+    }
+    func completeGoal() {
+        db.collection("groups").document(groupID).setData([
+            "completed": FieldValue.arrayUnion([user!.email!])
+        ])
+    }
+    
 }
+
 
 struct UserRow_Previews: PreviewProvider {
     static var previews: some View {
-        UserRow()
+        UserRow(groupName: "boys", groupID: "", name: "Boy", goal: "Be Boy", completed: true, daysForgotten: 3)
     }
 }

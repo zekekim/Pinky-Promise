@@ -1,0 +1,6 @@
+framework module Pods_Accountable_AccountableUITests {
+  umbrella header "Pods-Accountable-AccountableUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

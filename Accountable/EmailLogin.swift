@@ -17,6 +17,7 @@ struct EmailLogin: View {
     @State var isLoading = false
     @State var navigation: Int?
     @EnvironmentObject var glistModel:GroupListModel
+    let db = Firestore.firestore()
     var body: some View {
         NavigationView {
             ZStack {
@@ -74,11 +75,21 @@ struct EmailLogin: View {
                                     loginError = true
                                     errorMessage =  error!.localizedDescription
                                     isLoading = false
+                                    
                                     return
                                 }
                                 if(authResult != nil) {
-                                    isLoading = false
-                                    navigation = 1
+                                    db.collection("users").document(authResult!.user.email!).setData([
+                                        "fcmtoken": "\(Messaging.messaging().fcmToken!)"
+                                    
+                                    ], merge: true) { err in
+                                        if let err = err {
+                                            print("Error writing document: \(err)")
+                                        } else {
+                                            isLoading = false
+                                            navigation = 1
+                                        }
+                                    }
                                 } else {
                                     return
                                 }

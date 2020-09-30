@@ -137,7 +137,8 @@ struct EmailSignUp: View {
                                             "groups": [
                                             ],
                                             "invites": [
-                                            ]
+                                            ],
+                                            "fcmtoken": "\(Messaging.messaging().fcmToken!)"
                                         ]) { err in
                                             if let err = err {
                                                 print("Error writing document: \(err)")

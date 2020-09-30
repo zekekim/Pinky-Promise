@@ -16,41 +16,40 @@ struct GroupPage: View {
     var groupID: String
     let db = Firestore.firestore()
     @State var newUserEmail = ""
-    @State var showNewUser = true
+    @State var showNewUser = false
     var body: some View {
-        VStack(spacing:0) {
-            ZStack {
-                Text(groupName)
-                    .padding()
-                    .font(.title)
-                    .foregroundColor(.blue)
-                HStack {
-                    Image(systemName: "chevron.left")
-                        .imageScale(.large)
-                        .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
-                        .padding(.leading, 20)
-                        .onTapGesture(count: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/, perform: {
-                            presentationMode.wrappedValue.dismiss()
-                        })
-                    Spacer()
-                }
-            }
-            Divider()
-            ScrollView {
-                List {
-                    
-                }
-                if(showNewUser) {
+        NavigationView {
+            VStack(spacing:0) {
+                ZStack {
+                    Text(groupName)
+                        .padding()
+                        .font(.title)
+                        .foregroundColor(.blue)
                     HStack {
-                        TextField("email", text: $newUserEmail)
+                        Image(systemName: "chevron.left")
+                            .imageScale(.large)
+                            .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                            .padding(.leading, 20)
+                            .onTapGesture(count: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/, perform: {
+                                presentationMode.wrappedValue.dismiss()
+                            })
+                        Spacer()
                     }
-                    .padding()
                 }
                 Divider()
-                Button(action: {
-                    withAnimation {
+                ScrollView {
+                    ForEach(model.currentParticipants, id:
+                                    \.self) { participant in
+                        UserRow(groupName: groupName, groupID: groupID, email: participant, goal: Array(model.currentGroupGoals.values)[model.currentParticipants.firstIndex(of: participant) ?? 0])
                     }
-                }, label: {
+                    if(showNewUser) {
+                        HStack {
+                            TextField("email", text: $newUserEmail)
+                        }
+                        .padding()
+                        Divider()
+                    }
+
                     HStack {
                         Image(systemName: showNewUser ? "checkmark" : "plus.circle")
                             .imageScale(.large)
@@ -70,17 +69,30 @@ struct GroupPage: View {
                                 .imageScale(.large)
                                 .padding(5)
                                 .foregroundColor(newUserEmail != "" ? .red: .gray )
+                                .onTapGesture(count: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/, perform: {
+                                    withAnimation {
+                                        showNewUser.toggle()
+                                    }
+                                })
                         }
                         if(!showNewUser ) {
                             Text("add a new user")
                                 .foregroundColor(.gray)
                                 .padding(.trailing, 5)
+                                .onTapGesture(count: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/, perform: {
+                                    showNewUser.toggle()
+                                })
                         }
-                        
                     }
-                })
-                .padding()
+                    .padding()
+                }
             }
+            .onAppear(perform: {
+                model.fetchGroup()
+            })
+            .navigationBarHidden(true)
+            .navigationBarTitle("")
+            .navigationBarBackButtonHidden(true)
         }
         .navigationBarHidden(true)
         .navigationBarTitle("")
@@ -88,6 +100,7 @@ struct GroupPage: View {
     }
     func inviteParticipants() {
         model.email = newUserEmail
+        model.fetchUser()
         db.collection("groups").document(groupID).setData([
             "invites" : FieldValue.arrayUnion([newUserEmail])
         ], merge: true) { err in
@@ -102,8 +115,15 @@ struct GroupPage: View {
                         print("Error writing document: \(err)")
                     } else {
                         print("Group Document successfully written!")
-                        withAnimation {
-                            showNewUser.toggle()
+                        db.collection("notifications").document("invites").setData([
+                            "\(groupName)": model.fcmToken
+                        ], merge: true) { err in
+                            if let err = err {
+                                print("Error writing document: \(err)")
+                            } else {
+                                print("Group Document successfully written!")
+                                
+                            }
                         }
                     }
                 }
