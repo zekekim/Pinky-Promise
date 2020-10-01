@@ -60,7 +60,7 @@ struct GroupsList: View {
                     }
                     Divider()
                     ScrollView {
-                        List() {
+
                             ForEach(model.groupNames, id: \.self) { group in
                                 GroupRow(groupName: group)
                                     .padding(.top, 10)
@@ -70,8 +70,7 @@ struct GroupsList: View {
                                         model.currentGroup = currentGroup
                                         currentGroupName = group
                                         navigation = 2
-                                    }
-                            }
+                                }
                         }
                         
                         Spacer()

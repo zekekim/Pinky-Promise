@@ -14,7 +14,7 @@ import FirebaseInstanceID
 
 @main
 struct AccountableApp: App {
-    @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     var glistmodel:GroupListModel
     init() {
         FirebaseApp.configure()
@@ -32,7 +32,7 @@ struct AccountableApp: App {
         }
     }
 }
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: NSObject, UIApplicationDelegate {
 
   var window: UIWindow?
   let gcmMessageIDKey = "gcm.message_id"

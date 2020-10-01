@@ -15,6 +15,7 @@ struct GroupPage: View {
     var groupName: String
     var groupID: String
     let db = Firestore.firestore()
+    let user = Auth.auth().currentUser
     @State var newUserEmail = ""
     @State var showNewUser = false
     var body: some View {
@@ -40,7 +41,11 @@ struct GroupPage: View {
                 ScrollView {
                     ForEach(model.currentParticipants, id:
                                     \.self) { participant in
-                        UserRow(groupName: groupName, groupID: groupID, email: participant, goal: Array(model.currentGroupGoals.values)[model.currentParticipants.firstIndex(of: participant) ?? 0])
+                        if(participant != user!.email!) {
+                            UserRow(groupName: groupName, groupID: groupID, email: participant)
+                        } else {
+                            PersonalRow(groupName: groupName, groupID: groupID)
+                        }
                     }
                     if(showNewUser) {
                         HStack {

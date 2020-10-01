@@ -79,10 +79,9 @@ struct EmailLogin: View {
                                     return
                                 }
                                 if(authResult != nil) {
-                                    db.collection("users").document(authResult!.user.email!).setData([
+                                    db.collection("users").document(authResult!.user.email!).updateData([
                                         "fcmtoken": "\(Messaging.messaging().fcmToken!)"
-                                    
-                                    ], merge: true) { err in
+                                    ]) { err in
                                         if let err = err {
                                             print("Error writing document: \(err)")
                                         } else {

@@ -15,7 +15,7 @@ struct UserRow: View {
     var user = Auth.auth().currentUser
     var email = ""
     @State var name: String = ""
-    @State var goal: String
+    @State var goal: String = ""
     @State var completed: Bool = false
     @State var daysForgotten: Int = 0
     @EnvironmentObject var model:GroupListModel
@@ -48,10 +48,14 @@ struct UserRow: View {
             if(model.currentCompleted.contains(email)) {
                 completed = true
             }
+            if (model.currentGroupGoals[email] != nil) {
+                goal = model.currentGroupGoals[email] ?? ""
+            }
         })
         .padding()
     }
     func sendTap() {
+        model.fetchUser()
         db.collection("notifications").document("taps").setData([
             "\(groupName)": model.fcmToken
         ], merge: true) { err in

@@ -18,7 +18,6 @@
 		A155191224E88F2E00232D76 /* GroupPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A155191124E88F2E00232D76 /* GroupPage.swift */; };
 		A155191424E8916000232D76 /* UserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A155191324E8916000232D76 /* UserRow.swift */; };
 		A182F8D524B3BF4A0050D8DB /* AccountableApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A182F8D424B3BF4A0050D8DB /* AccountableApp.swift */; };
-		A182F8D724B3BF4A0050D8DB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A182F8D624B3BF4A0050D8DB /* ContentView.swift */; };
 		A182F8D924B3BF4C0050D8DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A182F8D824B3BF4C0050D8DB /* Assets.xcassets */; };
 		A182F8DC24B3BF4C0050D8DB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A182F8DB24B3BF4C0050D8DB /* Preview Assets.xcassets */; };
 		A182F8E724B3BF4C0050D8DB /* AccountableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A182F8E624B3BF4C0050D8DB /* AccountableTests.swift */; };
@@ -28,6 +27,7 @@
 		A182F90824B3D2230050D8DB /* EmailLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A182F90724B3D2230050D8DB /* EmailLogin.swift */; };
 		A1A2F82E24DA555600D8DC32 /* GroupRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A2F82D24DA555600D8DC32 /* GroupRow.swift */; };
 		A1A2F83224DA602B00D8DC32 /* InviteList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A2F83124DA602B00D8DC32 /* InviteList.swift */; };
+		A1B549032525ABAB0001242C /* PersonalRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B548BD252595F70001242C /* PersonalRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +64,6 @@
 		A155191324E8916000232D76 /* UserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRow.swift; sourceTree = "<group>"; };
 		A182F8D124B3BF4A0050D8DB /* Accountable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Accountable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A182F8D424B3BF4A0050D8DB /* AccountableApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountableApp.swift; sourceTree = "<group>"; };
-		A182F8D624B3BF4A0050D8DB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A182F8D824B3BF4C0050D8DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A182F8DB24B3BF4C0050D8DB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A182F8DD24B3BF4C0050D8DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -79,6 +78,7 @@
 		A182F90724B3D2230050D8DB /* EmailLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailLogin.swift; sourceTree = "<group>"; };
 		A1A2F82D24DA555600D8DC32 /* GroupRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupRow.swift; sourceTree = "<group>"; };
 		A1A2F83124DA602B00D8DC32 /* InviteList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteList.swift; sourceTree = "<group>"; };
+		A1B548BD252595F70001242C /* PersonalRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalRow.swift; sourceTree = "<group>"; };
 		C8C3AECE254BDDDC7DCB0FE5 /* Pods-Accountable.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accountable.release.xcconfig"; path = "Target Support Files/Pods-Accountable/Pods-Accountable.release.xcconfig"; sourceTree = "<group>"; };
 		CAE4C6A9BA5ECFAF14C252DD /* Pods_AccountableTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AccountableTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF82F5A24B8131E62904D368 /* Pods-AccountableTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AccountableTests.release.xcconfig"; path = "Target Support Files/Pods-AccountableTests/Pods-AccountableTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -149,11 +149,11 @@
 			children = (
 				A1475604251C2319007C6480 /* Accountable.entitlements */,
 				A182F8D424B3BF4A0050D8DB /* AccountableApp.swift */,
-				A182F8D624B3BF4A0050D8DB /* ContentView.swift */,
 				A182F90324B3C3890050D8DB /* EmailSignUp.swift */,
 				A182F90724B3D2230050D8DB /* EmailLogin.swift */,
 				A1A2F82D24DA555600D8DC32 /* GroupRow.swift */,
 				A155191324E8916000232D76 /* UserRow.swift */,
+				A1B548BD252595F70001242C /* PersonalRow.swift */,
 				A182F90524B3CBBA0050D8DB /* GroupsList.swift */,
 				A10CBDB12522DC2900957466 /* Model.swift */,
 				A155191124E88F2E00232D76 /* GroupPage.swift */,
@@ -450,11 +450,11 @@
 				A182F90424B3C3890050D8DB /* EmailSignUp.swift in Sources */,
 				A155191224E88F2E00232D76 /* GroupPage.swift in Sources */,
 				A10CBDB22522DC2900957466 /* Model.swift in Sources */,
+				A1B549032525ABAB0001242C /* PersonalRow.swift in Sources */,
 				A10E88D624DE002400288473 /* NewGroupPage.swift in Sources */,
 				A182F90824B3D2230050D8DB /* EmailLogin.swift in Sources */,
 				A1A2F82E24DA555600D8DC32 /* GroupRow.swift in Sources */,
 				A1A2F83224DA602B00D8DC32 /* InviteList.swift in Sources */,
-				A182F8D724B3BF4A0050D8DB /* ContentView.swift in Sources */,
 				A182F8D524B3BF4A0050D8DB /* AccountableApp.swift in Sources */,
 				A155191424E8916000232D76 /* UserRow.swift in Sources */,
 				A182F90624B3CBBA0050D8DB /* GroupsList.swift in Sources */,

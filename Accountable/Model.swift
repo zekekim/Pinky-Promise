@@ -16,6 +16,7 @@ public class GroupListModel: ObservableObject {
     var groupName = ""
     var groupDesc = ""
     let db = Firestore.firestore()
+    @Published var ifAdmin = false
     @Published var email = ""
     @Published var fcmToken = ""
     @Published var currentGroup = ""
@@ -23,7 +24,7 @@ public class GroupListModel: ObservableObject {
     @Published var currentGroupDesc = ""
     @Published var currentGroupGoals: [String:String] = [:]
     @Published var currentGroupInvites: [String] = []
-    @Published var currentLastUpdated: Date = Date()
+    @Published var currentLastUpdated: String = ""
     @Published var currentCompleted: [String] = []
     @Published var groups: [String] = []
     @Published var groupNames: [String] = []
@@ -42,7 +43,7 @@ public class GroupListModel: ObservableObject {
             self.invites = []
             
             
-            let docRef = db.collection("users").document(user!.email!)
+            let docRef = db.collection("users").document(user!.email ?? email)
             docRef.getDocument { (document, error) in
                 let result = Result {
                     try document?.data(as: User.self)
@@ -59,12 +60,10 @@ public class GroupListModel: ObservableObject {
                         print("\(userDB)")
                         
                         self.groups.forEach {
-                            var components = DateComponents()
-                            components.hour = 0
-                            components.minute = 0
-                            components.second = 0
-                            components.nanosecond = 0
-                            let date = Calendar.current.date(from: components) ?? Date()
+                            let today = Date()
+                            let formatter = DateFormatter()
+                            formatter.dateStyle = .short
+                            let date = formatter.string(from: today)
                             let groupID = $0
                             print($0)
                             let docRef = self.db.collection("groups").document($0)
@@ -134,6 +133,11 @@ public class GroupListModel: ObservableObject {
                     // A `City` value was successfully initialized from the DocumentSnapshot.
                     print(groupDB.groupName)
                     self.currentGroupName = groupDB.groupName
+                    if(self.user!.email! == groupDB.admin) {
+                        self.ifAdmin = true
+                    } else {
+                        self.ifAdmin = false
+                    }
                     self.currentGroupDesc = groupDB.groupDescription
                     self.currentLastUpdated = groupDB.lastUpdated
                     self.currentGroupGoals = groupDB.goals ?? [:]
@@ -142,12 +146,10 @@ public class GroupListModel: ObservableObject {
                     self.currentCompleted = groupDB.completed ?? []
                     self.currentLastUpdated = groupDB.lastUpdated
                     self.currentTapped = groupDB.tapped ?? [:]
-                    var components = DateComponents()
-                    components.hour = 0
-                    components.minute = 0
-                    components.second = 0
-                    components.nanosecond = 0
-                    let date = Calendar.current.date(from: components) ?? Date()
+                    let today = Date()
+                    let formatter = DateFormatter()
+                    formatter.dateStyle = .short
+                    let date = formatter.string(from: today)
                     if (date != self.currentLastUpdated) {
                         self.db.collection("groups").document(self.currentGroup).updateData([
                             "completed" : FieldValue.delete(),
@@ -224,7 +226,7 @@ public struct Group: Codable {
     let groupName: String
     let groupDescription: String
     let admin: String
-    let lastUpdated: Date
+    let lastUpdated: String
     let participants: [String]?
     let invites: [String]?
     let goals: [String:String]?

@@ -22,6 +22,7 @@ struct EmailSignUp: View {
     @State var errorMessage = ""
     @State var navigation: Int?
     @EnvironmentObject var glistmodel: GroupListModel
+    let user = Auth.auth().currentUser
     let db = Firestore.firestore()
     
     var body: some View {
@@ -128,7 +129,6 @@ struct EmailSignUp: View {
                                     if error != nil {
                                         print(error!.localizedDescription)
                                     } else {
-                                        creationError = false
                                         print("Document successfully written!")
                                         db.collection("users").document(email).setData([
                                             "firstName": firstName,

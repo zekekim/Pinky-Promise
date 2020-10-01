@@ -102,12 +102,10 @@ struct NewGroupPage: View {
         let emptyBoolDict : [String:Bool] = [:]
         let emptyStringDict: [String:String] = [:]
         let groupID = "\(UUID())"
-        var components = DateComponents()
-        components.hour = 0
-        components.minute = 0
-        components.second = 0
-        components.nanosecond = 0
-        let date = Calendar.current.date(from: components) ?? Date()
+        let today = Date()
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        let date = formatter.string(from: today)
         db.collection("groups").document(groupID).setData([
             "groupName" : groupName,
             "groupDescription": groupDesc,
@@ -128,7 +126,7 @@ struct NewGroupPage: View {
                 print("Group Document successfully written!")
             }
         }
-        db.collection("users").document(user!.uid).setData([
+        db.collection("users").document(user!.email!).setData([
             "groups" : FieldValue.arrayUnion([groupID])
         ], merge: true) { err in
             if let err = err {
