@@ -30,6 +30,9 @@ struct GroupsList: View {
                 NavigationLink(destination: GroupPage(groupName:currentGroupName, groupID: currentGroup).environmentObject(model), tag: 2, selection: $navigation) {
                     EmptyView()
                 }
+                NavigationLink(destination: InviteList().environmentObject(model), tag: 3, selection: $navigation) {
+                    EmptyView()
+                }
                 VStack(spacing: 0) {
                     ZStack {
                         Text("ur groups")
@@ -54,6 +57,9 @@ struct GroupsList: View {
                                         .font(.caption)
                                         .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
                                 }
+                                .onTapGesture(perform: {
+                                    navigation = 3
+                                })
                                 .padding(.trailing,20)
                             }
                         }
@@ -65,9 +71,11 @@ struct GroupsList: View {
                                 GroupRow(groupName: group)
                                     .padding(.top, 10)
                                     .onTapGesture {
+
                                         index = model.groupNames.firstIndex(of: group)!
                                         currentGroup = model.groups[index]
                                         model.currentGroup = currentGroup
+                                        model.getGoals(groupID: currentGroup)
                                         currentGroupName = group
                                         navigation = 2
                                 }
@@ -99,7 +107,7 @@ struct GroupsList: View {
                     .frame(maxHeight:.infinity)
                 }
             }
-            .animation(.easeInOut)
+            .animation(.easeIn)
             .accentColor(.blue)
             .navigationBarTitle("")
             .navigationBarHidden(true)

@@ -41,15 +41,18 @@ struct UserRow: View {
                         sendTap()
                     }
                 })
+                .disabled(model.currentTapped.contains(email))
         }
         .onAppear(perform: {
-            model.email = email
-            model.fetchUser()
-            if(model.currentCompleted.contains(email)) {
-                completed = true
-            }
-            if (model.currentGroupGoals[email] != nil) {
-                goal = model.currentGroupGoals[email] ?? ""
+            DispatchQueue.main.async {
+                model.email = email
+                model.fetchUser()
+                if(model.currentCompleted.contains(email)) {
+                    completed = true
+                }
+                if (model.currentGroupGoals[email] != nil) {
+                    goal = model.currentGroupGoals[email] ?? ""
+                }
             }
         })
         .padding()
@@ -66,11 +69,6 @@ struct UserRow: View {
                 
             }
         }
-    }
-    func completeGoal() {
-        db.collection("groups").document(groupID).setData([
-            "completed": FieldValue.arrayUnion([user!.email!])
-        ])
     }
     
 }

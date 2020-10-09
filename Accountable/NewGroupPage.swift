@@ -99,8 +99,6 @@ struct NewGroupPage: View {
     }
     
     func addGroup() {
-        let emptyBoolDict : [String:Bool] = [:]
-        let emptyStringDict: [String:String] = [:]
         let groupID = "\(UUID())"
         let today = Date()
         let formatter = DateFormatter()
@@ -109,8 +107,8 @@ struct NewGroupPage: View {
         db.collection("groups").document(groupID).setData([
             "groupName" : groupName,
             "groupDescription": groupDesc,
-            "goals": emptyStringDict,
-            "tapped": emptyBoolDict,
+            "goals": [:],
+            "tapped": [],
             "completed": [],
             "admin" : user!.email!,
             "lastUpdated": date,

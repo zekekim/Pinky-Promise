@@ -33,6 +33,8 @@ struct GroupPage: View {
                             .padding(.leading, 20)
                             .onTapGesture(count: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/, perform: {
                                 presentationMode.wrappedValue.dismiss()
+                                model.getGoals(groupID: groupID)
+                                model.fetch()
                             })
                         Spacer()
                     }
@@ -42,44 +44,47 @@ struct GroupPage: View {
                     ForEach(model.currentParticipants, id:
                                     \.self) { participant in
                         if(participant != user!.email!) {
-                            UserRow(groupName: groupName, groupID: groupID, email: participant)
+                            UserRow(groupName: groupName, groupID: groupID, email: participant).environmentObject(model)
+                            Divider()
                         } else {
-                            PersonalRow(groupName: groupName, groupID: groupID)
+                            PersonalRow(groupName: groupName, groupID: groupID).environmentObject(model)
+                            Divider()
                         }
                     }
                     if(showNewUser) {
                         HStack {
-                            TextField("email", text: $newUserEmail)
+                            TextField("email", text: $newUserEmail, onCommit: {
+                                inviteParticipants()
+                            })
+                            Spacer()
+                            if(showNewUser) {
+                                Image(systemName: "xmark")
+                                    .imageScale(.small)
+                                    .padding(5)
+                                    .foregroundColor(newUserEmail != "" ? .red: .gray )
+                                    .onTapGesture(count: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/, perform: {
+                                        withAnimation {
+                                            showNewUser.toggle()
+                                            UIApplication.shared.endEditing()
+                                        }
+                                    })
+                            }
                         }
                         .padding()
                         Divider()
                     }
 
                     HStack {
-                        Image(systemName: showNewUser ? "checkmark" : "plus.circle")
+                        Image(systemName: "plus.circle")
                             .imageScale(.large)
                             .padding(5)
                             .foregroundColor(newUserEmail != "" ? .green: .gray)
                             .onTapGesture(count: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/, perform: {
-                                if (showNewUser) {
-                                    inviteParticipants()
-                                } else {
-                                    withAnimation {
-                                        showNewUser.toggle()
-                                    }
+                                withAnimation {
+                                    showNewUser.toggle()
                                 }
                             })
-                        if(showNewUser) {
-                            Image(systemName: "xmark")
-                                .imageScale(.large)
-                                .padding(5)
-                                .foregroundColor(newUserEmail != "" ? .red: .gray )
-                                .onTapGesture(count: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/, perform: {
-                                    withAnimation {
-                                        showNewUser.toggle()
-                                    }
-                                })
-                        }
+                        
                         if(!showNewUser ) {
                             Text("add a new user")
                                 .foregroundColor(.gray)
@@ -92,8 +97,10 @@ struct GroupPage: View {
                     .padding()
                 }
             }
+            .animation(.easeIn)
             .onAppear(perform: {
                 model.fetchGroup()
+                model.getGoals(groupID: groupID)
             })
             .navigationBarHidden(true)
             .navigationBarTitle("")
@@ -106,16 +113,16 @@ struct GroupPage: View {
     func inviteParticipants() {
         model.email = newUserEmail
         model.fetchUser()
-        db.collection("groups").document(groupID).setData([
+        db.collection("groups").document(groupID).updateData([
             "invites" : FieldValue.arrayUnion([newUserEmail])
-        ], merge: true) { err in
+        ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {
                 print("Group Document successfully written!")
-                db.collection("users").document(newUserEmail).setData([
+                db.collection("users").document(newUserEmail).updateData([
                     "invites": FieldValue.arrayUnion([groupID])
-                ], merge: true) { err in
+                ]) { err in
                     if let err = err {
                         print("Error writing document: \(err)")
                     } else {
